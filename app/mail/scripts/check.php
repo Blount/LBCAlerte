@@ -257,7 +257,20 @@ class Main
                                 try {
                                     $this->_mailer->send();
                                 } catch (phpmailerException $e) {
-                                    $this->_logger->warn($e->getMessage());
+										$this->_logger->warn($e->getMessage());
+										$mail->_logger = Logger::getLogger("main");		
+										$mail = new PHPMailer();
+										// Authentification
+										$mail->SMTPAuth = false;
+										$mail->Port = 25; // Par défaut
+										$mail->CharSet = "utf-8";
+										// Destinataire
+										$mail->AddAddress(trim($email));
+										// Objet
+										$mail->Subject = $subject;
+										 // Votre message
+										$mail->MsgHTML($message);
+										$mail->Send();
                                 }
                             } else {
                                 $newAds = array_reverse($newAds, true);
@@ -272,7 +285,20 @@ class Main
                                     try {
                                         $this->_mailer->send();
                                     } catch (phpmailerException $e) {
-                                        $this->_logger->warn($e->getMessage());
+										$this->_logger->warn($e->getMessage());
+										$mail->_logger = Logger::getLogger("main");		
+										$mail = new PHPMailer();
+										// Authentification
+										$mail->SMTPAuth = false;
+										$mail->Port = 25; // Par défaut
+										$mail->CharSet = "utf-8";
+										// Destinataire
+										$mail->AddAddress(trim($email));
+										// Objet
+										$mail->Subject = $subject;
+										 // Votre message
+										$mail->MsgHTML($message);
+										$mail->Send();
                                     }
                                 }
                             }
