@@ -97,6 +97,7 @@ class Main
             if ($from = $config->get("mailer", "from", null)) {
                 $this->_mailer->From = $from;
                 $this->_mailer->FromName = $from;
+                $this->_mailer->Sender = $from;
             }
         }
         $this->_mailer->isHTML(true);
