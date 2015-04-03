@@ -256,10 +256,15 @@ class Main
                         if (!$error) {
                             if ($alert->group_ads) {
                                 $subject = "Alert LeBonCoin : ".$alert->title;
-                                $message = '<h2>Alerte générée le '.date("d/m/Y H:i", $currentTime).'</h2>
-                                <p>Lien de recherche: <a href="'.htmlspecialchars($alert->url, null, "UTF-8").'">'.htmlspecialchars($alert->url, null, "UTF-8").'</a></p>
-                                <p>Liste des nouvelles annonces :</p><hr /><br />'.
-                                implode("<br /><hr /><br />", $newAds).'<hr /><br />';
+                                if (count($newAds) == 1) {
+                                    $message = '<h2>Alerte générée le '.date("d/m/Y H:i", $currentTime).'</h2>
+                                            <p>Une annonce trouvée :</p><hr /><br />'.
+                                            implode("<br /><hr /><br />", $newAds).'<hr /><br />';
+                                } else {
+                                    $message = '<h2>Alerte générée le '.date("d/m/Y H:i", $currentTime).'</h2>
+                                            <p>Liste des <font size="+3"><font color="#FF0000">'.count($newAds).'</font></font> nouvelles annonces :</p><hr /><br />'.
+                                            implode("<br /><hr /><br />", $newAds).'<hr /><br />';
+                                }
 
                                 $this->_mailer->Subject = $subject;
                                 $this->_mailer->Body = $message;
