@@ -271,7 +271,7 @@ form input[name=price_max] {
 
 form .categories {
 	overflow: auto;
-	height: 200px;
+	height: auto;
 }
 form .categories h3 {
 	margin: 0 1%;
