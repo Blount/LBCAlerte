@@ -18,7 +18,7 @@ class Alert
     public $categories;
     public $suspend = 0;
     public $group = "";
-    public $group_ads = 1;
+    public $group_ads = 0;
     public $send_mail = 1;
     public $send_sms_free_mobile = 0;
     public $last_id = 0;
