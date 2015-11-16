@@ -6,10 +6,30 @@ html {
     padding: 0;
 }
 
-body {
-	margin: 0;
-	background: transparent;
+
+
+* {
+  box-sizing: border-box;
 }
+
+@-ms-viewport{ width: device-width; }
+
+/* Advanced Checkbox Hack */
+body 
+{ 
+    animation: bugfix infinite 1s;   
+    margin: 0;
+    background: transparent; 
+}
+
+input[type=checkbox] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+@-keyframes bugfix { from {padding:0;} to {padding:0;} }
+
 
 a:link,
 a:visited,
@@ -63,6 +83,7 @@ table img {
 }
 .error {
     color: #EF0000;
+    text-align: center;
     font-weight: bold;
     margin: 0;
 }
@@ -188,6 +209,11 @@ header {
 header h1 {
 	margin: 0;
 	padding: 10px;
+    font-size: 1.8em;
+}
+
+header h1 i {
+    color: #EF0000;
 }
 header h1 a:link,
 header h1 a:active,
@@ -195,6 +221,52 @@ header h1 a:hover,
 header h1 a:visited
 {
 	color: #333333;
+}
+
+nav {
+  position: relative;
+  width: 100%;
+}
+
+nav a,
+nav label {
+  transition: color .3s ease-in-out;
+}
+
+nav ul {
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  list-style: none;
+}
+nav input[type=checkbox]:checked ~ ul > li {
+    width:auto;
+
+}
+nav ul {
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  list-style: none;
+}
+nav ul > li {
+  float: left;
+  padding:.15em .55em;
+  width: auto;
+  text-align: center;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+  transition-property: box-shadow;
+  box-shadow: 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+nav ul > li:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  box-shadow: 0 0.05em 0.25em 0 rgba(0, 0, 0, 0.35), inset 0 0 0 2em rgba(0, 0, 0, 0.3);
+}
+nav ul > li:hover > a {
+  color: #fff;
 }
 
 footer {
@@ -210,7 +282,7 @@ footer {
 .topmenu {
     background: #424242;
 	margin: 0;
-	padding: 0 10px;
+	padding: 0px;
 	list-style: none;
 	overflow: hidden;
 	line-height: 30px;
@@ -333,8 +405,55 @@ form .categories input[type=checkbox] {
 	color: #E00000;
 }
 
+.login_form {
+    margin: 0 auto;
+}
+.login_form input[type=submit] {
+    width:100%;
+}
+
+/* mobile format (based on menu) */
+@media screen and (max-width: 755px) {
 
 
+  ul.topmenu> li {
+          float:inherit;
+          width: 100%;
+  }
+  nav label:after {
+    position: fixed;
+    right: .25em;
+    top: 10px;
+    content: "\2261";
+    font-size: 1.8em;
+    cursor: pointer;
+  }
+  nav ul {
+    display: none;
+    height: 100%;
+  }
+  nav input[type=checkbox]:checked ~ label:after {
+    color: #222;
+  }
+  nav input[type=checkbox]:checked ~ ul {
+    display: block;
+  }
+  nav input[type=checkbox]:checked ~ ul > li {
+    width: 100%;
+    opacity: .8;
+    text-align: left;
+  }
+  nav input[type=checkbox]:checked ~ ul > li:after {
+    position: absolute;
+    right: 10px;
+    color: #ccc;
+    margin-top:-28px;
+    content: "\203A";
+    font: bold 1.4em sans-serif;
+  }
+  header{
+    background: #F0F0F0;
+  }
 
-
+}
 
