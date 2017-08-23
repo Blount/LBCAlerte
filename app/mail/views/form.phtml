@@ -2,6 +2,17 @@
 $alertCategories = $alert->getCategories();
 ?>
 <h2>Création d'une nouvelle alerte</h2>
+
+<?php
+if (isset($errors["quota"]))
+{
+    echo '<p class="error">'.$errors["quota"].'</p>';
+}
+else
+{
+?>
+
+
 <form action="" method="post" class="form-alert">
     <h2>Options obligatoires</h2>
     <dl>
@@ -177,8 +188,6 @@ $alertCategories = $alert->getCategories();
 
 
 
-
-
-
-
-
+<?php
+}
+?>

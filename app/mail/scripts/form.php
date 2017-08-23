@@ -1,4 +1,12 @@
 <?php
+$errors = array();
+
+$alerts = $storage->fetchAll();
+$user = $userStorage->fetchByUsername($_SESSION["chekyauth"]["username"]);
+
+if ($user->getQuota() != 0 && count($alerts) >= $user->getQuota())
+    $errors["quota"] = "Vous ne pouvez plus ajouter d'alerte, votre quota est atteint (".$user->getQuota().").";
+
 if (isset($_GET["id"])) {
     $alert = $storage->fetchById($_GET["id"]);
 }
@@ -14,7 +22,7 @@ if (isset($_GET["preurl"])) {
 }
 
 $categoryCollection = new \Lbc\CategoryCollection();
-$errors = array();
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($_POST AS $name => $value) {
