@@ -24,6 +24,13 @@
             <p class="error"><?php echo $errors["confirmPassword"]; ?></p>
             <?php endif; ?>
         </dd>
+        <dt><label for="quota">Nombre d'alertes maximum (0 pour illimité)</label></dt>
+        <dd>
+            <input type="text" id="quota" name="quota" value="0"/>
+            <?php if (isset($errors["quota"])) : ?>
+            <p class="error"><?php echo $errors["quota"]; ?></p>
+            <?php endif; ?>
+        </dd>
     </dl>
     <p><input type="submit" value="Enregistrer" />
         | <a href="?mod=admin&amp;a=users">annuler</a></p>

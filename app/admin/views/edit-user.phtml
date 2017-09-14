@@ -1,0 +1,14 @@
+<form action="" method="post" autocomplete="off">
+    <h2>Modifier l'utilisateur <?php echo $user_get; ?></h2>
+    <dl>
+        <dt><label for="quota">Nombre d'alertes maximum (0 pour illimité)</label></dt>
+        <dd>
+            <input type="text" id="quota" name="quota" value="<?php echo $user->getQuota(); ?>"/>
+            <?php if (isset($errors["quota"])) : ?>
+            <p class="error"><?php echo $errors["quota"]; ?></p>
+            <?php endif; ?>
+        </dd>
+    </dl>
+    <p><input type="submit" value="Enregistrer" />
+        | <a href="?mod=admin&amp;a=users">annuler</a></p>
+</form>

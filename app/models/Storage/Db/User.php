@@ -26,7 +26,8 @@ class User implements \App\Storage\User
                 ->setPassword($userDb->password)
                 ->setUsername($userDb->username)
                 ->setApiKey($userDb->api_key)
-                ->setRssKey($userDb->rss_key);
+                ->setRssKey($userDb->rss_key)
+                ->setQuota($userDb->quota);
             $this->_loadUserOptions($user, $userDb->options);
             $users[] = $user;
         }
@@ -46,7 +47,8 @@ class User implements \App\Storage\User
                 ->setPassword($userDb->password)
                 ->setUsername($userDb->username)
                 ->setApiKey($userDb->api_key)
-                ->setRssKey($userDb->rss_key);
+                ->setRssKey($userDb->rss_key)
+                ->setQuota($userDb->quota);
             $this->_loadUserOptions($user, $userDb->options);
         }
         return $user;
@@ -94,20 +96,23 @@ class User implements \App\Storage\User
                     `password`,
                     `api_key`,
                     `rss_key`,
-                    `options`
+                    `options`,
+                    `quota`
                 ) VALUES (
                     '".$this->_connection->real_escape_string($user->getUsername())."',
                     '".$this->_connection->real_escape_string($user->getPassword())."',
                     ".$api_key.",
                     ".$rss_key.",
-                    '".$this->_connection->real_escape_string(json_encode($user->getOptions()))."'
+                    '".$this->_connection->real_escape_string(json_encode($user->getOptions()))."',
+                    '".$this->_connection->real_escape_string($user->getQuota())."'
                 )");
         } else {
             $this->_connection->query("UPDATE `".$this->_table."` SET
                 `password` = '".$this->_connection->real_escape_string($user->getPassword())."',
                 `api_key` = ".$api_key.",
                 `rss_key` = ".$rss_key.",
-                `options` = '".$this->_connection->real_escape_string(json_encode($user->getOptions()))."'
+                `options` = '".$this->_connection->real_escape_string(json_encode($user->getOptions()))."',
+                `quota` = ".(int)$user->getQuota()."
             WHERE id = ".$user->getId());
         }
         return $this;

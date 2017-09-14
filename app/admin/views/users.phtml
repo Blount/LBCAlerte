@@ -3,6 +3,8 @@
     <thead>
         <tr>
             <th>Nom d'utilisateur</th>
+            <th>Quota</th>
+            <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
     </thead>
@@ -10,6 +12,14 @@
         <?php foreach ($users AS $user) : ?>
         <tr>
             <td><?php echo htmlspecialchars($user->getUsername()); ?></td>
+            <td><?php echo $user->getQuota(); ?></td>
+            <td>
+                <?php if ($user->getUsername() != "admin") : ?>
+                <a href="?mod=admin&amp;a=edit-user&amp;username=<?php echo urlencode($user->getUsername()); ?>">modifier</a>
+                <?php else: ?>
+                -
+                <?php endif; ?>
+            </td>
             <td>
                 <?php if ($user->getUsername() != "admin") : ?>
                 <a href="?mod=admin&amp;a=delete-user&amp;username=<?php echo urlencode($user->getUsername()); ?>">supprimer</a>

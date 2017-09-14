@@ -7,6 +7,7 @@ class User
     protected $_id;
     protected $_username;
     protected $_password;
+    protected $_quota;
     protected $_api_key;
     protected $_rss_key;
     protected $_options = array();
@@ -132,6 +133,24 @@ class User
     public function getPassword()
     {
         return $this->_password;
+    }
+
+    /**
+    * @param string $quota
+    * @return User
+    */
+    public function setQuota($quota = 0)
+    {
+        $this->_quota = (int)$quota;
+        return $this;
+    }
+
+    /**
+    * @return string
+    */
+    public function getQuota()
+    {
+        return (int)$this->_quota;
     }
 
     /**

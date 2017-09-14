@@ -12,6 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (empty($_POST["password"]) || $_POST["password"] != $_POST["confirmPassword"]) {
         $errors["confirmPassword"] = "Les deux mots de passe ne correspondent pas.";
     }
+    if (empty($_POST["quota"])) {
+        $errors["quota"] = "Veuillez indiquer un quota.";
+    } else {
+        $user->setQuota(trim((int)$_POST["quota"]));
+    }
     if (empty($errors)) {
         $user->setPassword(sha1($_POST["password"]));
         $userStorage->save($user);
