@@ -49,7 +49,6 @@ class Main
 
         $this->_lock();
         $this->_running = true;
-
         $this->_logger->info("[Pid ".getmypid()."] Vérification des alertes.");
 
         $this->_mailer = new PHPMailer($exceptions=true);
@@ -539,8 +538,16 @@ class Main
 
     protected function _lock()
     {
+
+
         if (is_file($this->_lockFile)) {
+          $content = file_get_contents($this->_lockFile);
+          //on vérifie que le pid existe vraiment
+          if(posix_kill(explode("\n",$content)[1], 0)){
             throw new Exception("Un processus est en cours d'exécution.");
+          }else{
+            Logger::getLogger("main")->info("Le précédent process s'est interrompu de manière anormale.");
+          }
         }
         file_put_contents($this->_lockFile, time()."\n".getmypid());
         return $this;
@@ -574,8 +581,3 @@ try {
 
 $main->check();
 $main->shutdown();
-
-
-
-
-
