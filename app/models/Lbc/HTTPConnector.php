@@ -412,7 +412,7 @@ class HTTPConnector extends HttpClientCurl
             }
         }
 
-        if ($options_cities) {
+        if (isset($options_cities)) {
             $location = array("locations" => $options_cities);
         }
 
